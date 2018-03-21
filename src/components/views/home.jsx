@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
     render() {
         return (
-            <h2>This is the home!</h2>
+            <ul>
+                <li><Link to='/newBudget'>New Budget</Link></li>
+                <li><Link to='/'>Load Budget</Link></li>
+            </ul>
         )
     }
 }
