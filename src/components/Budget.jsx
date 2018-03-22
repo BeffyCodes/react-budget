@@ -10,14 +10,14 @@ class Budget extends Component {
                 id: 1,
                 name: "Test",
                 date: "12/12/12",
-                amount: "$50.00",
+                amount: 50,
                 category: "Dining"
             },
             {
                 id: 2,
                 name: "Test2",
                 date: "10/11/15",
-                amount: "$320.22",
+                amount: 320.22,
                 category: "Stuff"
             }
         ],
@@ -105,21 +105,25 @@ class Budget extends Component {
 
 
     render() {
+        let totalExpenses = 0;
+        const expensesToDisplay = this.state.expenses.map((expense) =>{
+            totalExpenses += expense.amount;
 
-        const expensesToDisplay = this.state.expenses.map((expense) =>
-            <Expense
+            return <Expense
                 key={expense.id}
                 name={expense.name}
                 date={expense.date}
                 amount={expense.amount}
                 category={expense.category}
+                currency={this.props.currency}
             />
-        )
+        })
         return (
             <div>
                 <h2>{this.props.name}</h2>
                 <h3>Spending limit per month: ${this.props.topLimit}</h3>
                 <h3>Total income per month: ${this.props.monthlyIncome}</h3>
+                <h3>Total spent this month: ${totalExpenses}</h3>
 
                 {this.state.showExpenseCreation &&
                     <CreateExpense

@@ -38,6 +38,7 @@ class Main extends Component {
                             name={this.state.budgetName}
                             monthlyIncome={this.state.monthlyIncome}
                             topLimit={this.state.topLimit}
+                            currency={this.state.currency}
                         />
                     }} />}
                 </Switch>
