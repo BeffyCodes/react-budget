@@ -6,7 +6,7 @@ class Expense extends Component {
             <ul>
                 <li>{this.props.name}</li>
                 <li>{this.props.date}</li>
-                <li>{this.props.amount.toLocaleString(undefined,{style: 'currency', currencyDisplay: 'symbol', currency: this.props.currency})}</li>
+                <li>{parseFloat(this.props.amount).toLocaleString(undefined,{style: 'currency', currencyDisplay: 'symbol', currency: this.props.currency})}</li>
                 <li>{this.props.category}</li>
             </ul>
 

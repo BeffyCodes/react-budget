@@ -14,7 +14,7 @@ class CreateExpense extends Component {
                 </label>
                 <label>
                     Amount:
-                    <input type="text" value={this.props.amount} onChange={(e) => this.props.expenseAmountChanged(e.target.value)} name="expenseAmount"/>
+                    <input type="number" value={this.props.amount} onChange={(e) => this.props.expenseAmountChanged(e.target.value)} name="expenseAmount"/>
                 </label>
                 <label>
                     Category:

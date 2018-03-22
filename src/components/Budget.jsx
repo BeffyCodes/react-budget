@@ -25,7 +25,7 @@ class Budget extends Component {
         expenseToCreate: {
             name: "",
             date: "",
-            amount: 0,
+            amount: "",
             category: ""
         },
         idCounter: 3
@@ -56,6 +56,11 @@ class Budget extends Component {
     }
 
     onCreateExpenseAmountChange = (newAmount) => {
+        if (Number.isNaN(parseFloat(newAmount))) {
+            newAmount = "";
+        } else {
+            newAmount = parseFloat(newAmount).toString();
+        }
         this.setState((currentState) => ({
             expenseToCreate: {
                 name: currentState.expenseToCreate.name,
@@ -96,7 +101,7 @@ class Budget extends Component {
                 expenseToCreate: {
                     name: "",
                     date: "",
-                    amount: 0,
+                    amount: "",
                     category: ""
                 }
             }
@@ -106,8 +111,8 @@ class Budget extends Component {
 
     render() {
         let totalExpenses = 0;
-        const expensesToDisplay = this.state.expenses.map((expense) =>{
-            totalExpenses += expense.amount;
+        const expensesToDisplay = this.state.expenses.map((expense) => {
+            totalExpenses += parseFloat(expense.amount);
 
             return <Expense
                 key={expense.id}
@@ -123,7 +128,11 @@ class Budget extends Component {
                 <h2>{this.props.name}</h2>
                 <h3>Spending limit per month: ${this.props.topLimit}</h3>
                 <h3>Total income per month: ${this.props.monthlyIncome}</h3>
-                <h3>Total spent this month: ${totalExpenses}</h3>
+                <span>Total spent this month:</span>
+                <span
+                    className={totalExpenses > this.props.topLimit  ? 'over-limit' : this.props.topLimit === totalExpenses ? 'at-limit' : 'under-limit'}>
+                    {totalExpenses.toLocaleString(undefined,{style: 'currency', currencyDisplay: 'symbol', currency: this.props.currency})}
+                </span>
 
                 {this.state.showExpenseCreation &&
                     <CreateExpense
